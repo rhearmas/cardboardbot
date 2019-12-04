@@ -1,6 +1,6 @@
 exports.run = async (client, message, args, level) => {
 	const response = await client.awaitReply(message, "Favourite Color?");
-	message.reply(`Oh, I really love ${response} too!`);
+	message.reply(`I really love ${response} too!`);
 }
 
 exports.conf = {
