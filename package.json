@@ -1,7 +1,7 @@
 {
-  "name": "guidebot",
-  "version": "2.3.6",
-  "description": "A boilerplate example bot with command handler and reloadable commands. Updated and Maintained by the Idiot's Guide Community",
+  "name": "cardboardbot",
+  "version": "1.0.0",
+  "description": "Discord bot that manages everything at my discord server.",
   "main": "index.js",
   "scripts": {
     "start": "node index.js",
@@ -12,17 +12,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/An-Idiots-Guide/guidebot.git"
+    "url": "git+https://github.com/rhearmas/cardboardbot.git"
   },
-  "author": "Evelyne Lachance <eslachance@gmail.com> (http://evie.codes)",
-  "contributors": [
-    "York (http://anidiots.guide)"
-  ],
-  "license": "MIT",
+  "author": "rhearmas <rhearmas@gmail.com> (http://rhearmas.carrd.co)",
   "bugs": {
-    "url": "https://github.com/An-Idiots-Guide/guidebot/issues"
+    "url": "https://github.com/rhearmas/cardboardbot/issues"
   },
-  "homepage": "https://github.com/An-Idiots-Guide/guidebot#readme",
+  "homepage": "https://github.com/rhearmas/cardboardbot#readme",
   "dependencies": {
     "better-sqlite3": "^5.4.0",
     "chalk": "^2.4.2",
@@ -33,5 +29,8 @@
     "moment": "^2.24.0",
     "moment-duration-format": "^2.3.2",
     "recrawl": "^2.0.0"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }
