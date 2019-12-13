@@ -38,7 +38,8 @@ exports.run = async (client, message, args, level) => {
   await message.channel.send({embed: new Discord.RichEmbed()
     .setTitle(`${user.username}'s Avatar`)
     .setImage({image: user.avatarURL})
-    .setFooter(`[Download](${user.avatarURL}),https://telegram-stickers.github.io/public/stickers/windows-10/33.png)
+    .setFooter(`[Download](${user.avatarURL})`,"https://telegram-stickers.github.io/public/stickers/windows-10/33.png")
+  });
 };
 
 exports.conf = {
