@@ -1,3 +1,5 @@
+// This command has already been completed.
+
 exports.run = (bot, msg, args) => {
     if (args.length < 1) {
         throw 'You must specify something to embed!';
