@@ -37,7 +37,7 @@ exports.run = async (client, message, args, level) => {
 	message.delete();
 
 	if (!args[0]) {
-		message.reply("you must provide an equation to be solved!");
+		return (await message.reply("you must provide an equation to be solved!")).delete(5000);
 	}
 
 	const question = args.join(" ");
@@ -49,25 +49,19 @@ exports.run = async (client, message, args, level) => {
 		message.channel.send(`**Invalid math equation:** ${err}`);
 	}
 
-	message.channel.send({
-		embed: new Discord.Richembed()
-			.setTitle("")
-			.setDescription("")
-			.addField("Equation",question)
-			.addField("Answer",answer)
-	});
+	message.channel.send(client.embed('', stripIndents`**Equation:**\n\`\`\`\n${question}\n\`\`\`**Answer:**\n\`\`\`\n${answer}\n\`\`\``));
 };
 
 exports.conf = {
 	enabled: true,
 	guildOnly: false,
-	aliases: [],
+	aliases: ['calc', 'math'],
 	permLevel: "User"
 };
 
 exports.help = {
-	name: "",
-	category: "",
-	description: "",
-	usage: ""
+	name: "calculator",
+	category: "Utility",
+	description: "Calculates almost any math equation",
+	usage: "calculate <equation>"
 };
