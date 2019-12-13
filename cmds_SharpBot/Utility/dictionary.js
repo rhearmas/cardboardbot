@@ -1,3 +1,5 @@
+// This command has already been created.
+
 const webdict = require('webdict');
 
 const makeCommand = method => {

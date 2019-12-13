@@ -16,10 +16,10 @@ module.exports = (client) => {
 	};
 	
 	const defaultSettings = {
-		"prefix": "~",
+		"prefix": "/",
 		"modLogChannel": "mod-log",
-		"modRole": "Moderator",
-		"adminRole": "Administrator",
+		"modRole": "modinator",
+		"adminRole": "adminator",
 		"systemNotice": "true",
 		"welcomeChannel": "welcome",
 		"welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
@@ -97,6 +97,46 @@ module.exports = (client) => {
 		}
 		return false;
 	};
+
+	client.reloadCommand = async(commandName) => {
+		// step 1: unload the command
+		let command;
+		if (client.commands.has(commandName)) {
+			command = client.commands.get(commandName);
+		} else if (client.aliases.has(commandName)) {
+			command = client.commands.get(client.aliases.get(commandName));
+		}
+		if (!command) return `The command \`${commandName}\` doesn\'t seem to exist, nor is it an alias. Try again!`;
+		
+		if (command.shutdown) {
+			await command.shutdown(client);
+		}
+		const mod = require.cache[require.resolve(`../commands/${command.help.category}/${command.help.name}`)];
+		delete require.cache[require.resolve(`../commands/${command.help.category}/${command.help.name}.js`)];
+		for (let i = 0; i < mod.parent.children.length; i++) {
+			if (mod.parent.children[i] === mod) {
+				mod.parent.children.splice(i, 1);
+				break;
+			}
+		}
+		return false;
+
+		// step 2: load said command
+		try {
+			client.logger.log(`Loading Command: ${commandName}`);
+			const props = require(`../${commandName}`);
+			if (props.init) {
+				props.init(client);
+			}
+			client.commands.set(props.help.name, props);
+			props.conf.aliases.forEach(alias => {
+				client.aliases.set(alias, props.help.name);
+			});
+			return false;
+		} catch (e) {
+			return `Unable to load command ${commandName}: ${e}`;
+		}
+	}
 	
 	Object.defineProperty(String.prototype, "toProperCase", {
 		value: function() {
@@ -123,4 +163,69 @@ module.exports = (client) => {
 		client.logger.error(`Unhandled rejection: ${err}`);
 		console.error(err);
 	});
+
+	client.parseArgs = (args, options) => {
+		if (!options)
+			return args;
+		if (typeof options === 'string')
+			options = [options];
+
+		let optionValues = {};
+
+		let i;
+		for (i = 0; i < args.length; i++) {
+			let arg = args[i];
+			if (!arg.startsWith('-')) {
+				break;
+			}
+
+		let label = arg.substr(1);
+
+			if (options.indexOf(label + ':') > -1) {
+				let leftover = args.slice(i + 1).join(' ');
+				let matches = leftover.match(/^"(.+?)"/);
+				if (matches) {
+					optionValues[label] = matches[1];
+					i += matches[0].split(' ').length;
+				} else {
+					i++;
+					optionValues[label] = args[i];
+				}
+			} else if (options.indexOf(label) > -1) {
+				optionValues[label] = true;
+			} else {
+				break;
+			}
+		}
+
+		return {
+			options: optionValues,
+			leftover: args.slice(i)
+		};
+	};
+
+	client.embed = (title, description = '', fields = [], options = {}) => {
+		let url = options.url || '';
+		let color = options.color || randomColor();
+
+		if (options.inline) {
+			if (fields.length % 3 === 2) {
+				fields.push({ name: '\u200b', value: '\u200b' });
+			}
+			fields.forEach(obj => {
+				obj.inline = true;
+			});
+		}
+
+		return new RichEmbed({ fields, video: options.video || url })
+			.setTitle(title)
+			.setColor(color)
+			.setDescription(description)
+			.setURL(url)
+			.setImage(options.image)
+			.setTimestamp(options.timestamp ? timestampToDate(options.timestamp) : null)
+			.setFooter(options.footer === true ? randomFooter() : (options.footer ? options.footer : ''), options.footer ? global.bot.user.avatarURL : undefined)
+			.setAuthor(options.author === undefined ? '' : options.author)
+			.setThumbnail(options.thumbnail);
+	};
 };
