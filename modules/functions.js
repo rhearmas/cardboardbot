@@ -1,3 +1,5 @@
+const Discord = require("discord.js");
+
 module.exports = (client) => {
 	client.permlevel = message => {
 		let permlvl = 0;
@@ -217,7 +219,7 @@ module.exports = (client) => {
 			});
 		}
 
-		return new RichEmbed({ fields, video: options.video || url })
+		return new Discord.RichEmbed({ fields, video: options.video || url })
 			.setTitle(title)
 			.setColor(color)
 			.setDescription(description)
@@ -227,5 +229,27 @@ module.exports = (client) => {
 			.setFooter(options.footer === true ? randomFooter() : (options.footer ? options.footer : ''), options.footer ? global.bot.user.avatarURL : undefined)
 			.setAuthor(options.author === undefined ? '' : options.author)
 			.setThumbnail(options.thumbnail);
+	};
+
+	const randomColor = () => [
+    	Math.floor(Math.random() * 256),
+    	Math.floor(Math.random() * 256),
+    	Math.floor(Math.random() * 256)
+	];
+
+	const randomFooter = () => {
+    	return randomSelection([
+    	    'just add water!',
+    	    'Powered by squirrels!',
+    	    'codeisluvcodeislife',
+    	    'Where did you get that?',
+    	    'WHAT DID YOU BREAK!?',
+    	    'D-D-D-DROP THE BASS',
+    	   	'Eat, Sleep, JavaScript',
+    	    '#BlameRhearmas',
+    	    'SharpBot was the best, right?',
+    	    'I like turtles',
+    	    'Hi mom!'
+    	]);
 	};
 };
