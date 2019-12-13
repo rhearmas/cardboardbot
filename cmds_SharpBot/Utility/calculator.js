@@ -1,3 +1,5 @@
+// This command has already been created.
+
 const math = require('math-expression-evaluator');
 const stripIndents = require('common-tags').stripIndents;
 

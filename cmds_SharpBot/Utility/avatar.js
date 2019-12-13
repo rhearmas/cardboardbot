@@ -1,3 +1,5 @@
+// This command has already been created.
+
 exports.run = async (bot, msg) => {
     const user = msg.mentions.users.first();
     if (!user) {
