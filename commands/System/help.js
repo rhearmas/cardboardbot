@@ -1,4 +1,5 @@
 exports.run = (client, message, args, level) => {
+  message.delete();
   if (!args[0]) {
     const myCommands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
     
