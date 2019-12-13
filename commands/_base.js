@@ -1,3 +1,5 @@
+/* make sure these aren't commented
+
 exports.run = async (client, message, args, level) => {
   
 };
@@ -15,3 +17,5 @@ exports.help = {
   description: "",
   usage: ""
 };
+
+*/
