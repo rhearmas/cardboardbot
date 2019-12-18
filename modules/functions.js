@@ -113,8 +113,8 @@ module.exports = (client) => {
 		if (command.shutdown) {
 			await command.shutdown(client);
 		}
-		const mod = require.cache[require.resolve(`../commands/${command.help.category}/${command.help.name}`)];
-		delete require.cache[require.resolve(`../commands/${command.help.category}/${command.help.name}.js`)];
+		const mod = require.cache[require.resolve(`../commands/${command.help.category}/${commandName}.js`)];
+		delete require.cache[require.resolve(`../commands/${command.help.category}/${commandName}.js`)];
 		for (let i = 0; i < mod.parent.children.length; i++) {
 			if (mod.parent.children[i] === mod) {
 				mod.parent.children.splice(i, 1);
@@ -125,8 +125,7 @@ module.exports = (client) => {
 
 		// step 2: load said command
 		try {
-			client.logger.log(`Loading Command: ${commandName}`);
-			const props = require(`../${commandName}`);
+			const props = require(`../commands/${command.help.category}/${command.Name}`);
 			if (props.init) {
 				props.init(client);
 			}
