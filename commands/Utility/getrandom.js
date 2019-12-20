@@ -117,7 +117,7 @@ exports.run = async (client, message, args, level) => {
 
 							for(cidx in chosen) {
 								let theChose = chosen[cidx];
-								out.push(`${theChose.user.tag} (${theChose.user})`);
+								out.push(`${theChose.user.tag} ${args[4] && args[4] === "-noping" ? "" : `(${theChose.user})`}`);
 							}
 
 							message.channel.send(`**I've selected these people:**\n${out.join("\n")}${eout.length < 1 ? '' : `\n\n**Excluded from drawing:**\n${eout.join("\n")}`}`);
