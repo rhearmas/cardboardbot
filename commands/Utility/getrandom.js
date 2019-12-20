@@ -17,7 +17,7 @@ exports.run = async (client, message, args, level) => {
 		return;
 	}
 	
-	let limit = 5;
+	let limit = 1;
 	if(args[3]) {
 		limit = args[3];
 	}
@@ -117,7 +117,7 @@ exports.run = async (client, message, args, level) => {
 
 							for(cidx in chosen) {
 								let theChose = chosen[cidx];
-								out.push(theChose.user.tag);
+								out.push(`${theChose.user.tag} (${theChose.user})`);
 							}
 
 							message.channel.send(`**I've selected these people:**\n${out.join("\n")}${eout.length < 1 ? '' : `\n\n**Excluded from drawing:**\n${eout.join("\n")}`}`);
