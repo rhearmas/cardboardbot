@@ -23,7 +23,8 @@ exports.run = async (client, message, args, level) => {
 		console.log(error);
 		msg.edit(`Hey ${message.author}, there was an error while reloading command \`${commandName}\`:\n\`${error.message}\``).then(msg => {
 			msg.delete(10000);
-		});   
+		});
+		return; 
 	}
 
 	msg.edit(`**Command \`${command.help.name}\` has been reloaded successfully.**`).then(msg => {
