@@ -1,7 +1,11 @@
 const got = require('got');
 
 exports.run = async (client, message, args, level) => {
-	if (!args[0]) return message.reply('you must specify a repository or search term!');
+	if (!args[0]) {
+		message.reply('you must specify a repository or search term!');
+		message.delete();
+		return;
+	}
 
 	const input = args.join(' ');
 
@@ -73,7 +77,7 @@ exports.info = {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: [],
+  aliases: ['git'],
   permLevel: "User"
 };
 
