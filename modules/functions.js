@@ -1,4 +1,5 @@
 const Discord = require("discord.js");
+const got = require("got");
 
 module.exports = (client) => {
 	client.permlevel = message => {
@@ -309,5 +310,57 @@ module.exports = (client) => {
 				channel.send(m);
 			}, delay * i);
 		});
+	};
+
+	client.textUpload = (text, options) => {
+		options = options || {};
+		let method = (options.method || uploadMethods.ix).toLowerCase();
+
+		if (method === uploadMethods.ix) {
+			return ixUpload(text);
+		} else if (method === uploadMethods.hastebin) {
+			return hastebinUpload(text);
+		}
+	};
+
+	const uploadMethods = {
+		hastebin: 'hastebin',
+		ix: 'ix.io'
+	};
+
+	const hastebinUpload = text => {
+		return got('https://hastebin.com/documents', { body: { 'contents': text }, form: true })
+			.then(res => {
+				if (res && res.body && res.body.key) {
+					const key = res.body.key;
+					return {
+						key: key,
+						success: true,
+						url: `https://hastebin.com/${key}`,
+						rawUrl: `https://hastebin.com/raw/${key}`
+					};
+				} else {
+					return {
+						success: false
+					};
+				}
+			});
+	};
+
+	const ixUpload = text => {
+		return got('http://ix.io', { body: { 'f:1': text }, form: true })
+			.then(res => {
+				if (res && res.body) {
+					return {
+						success: true,
+						url: res.body,
+						rawUrl: res.body
+					};
+				} else {
+					return {
+						success: false
+					};
+				}
+			});
 	};
 };
