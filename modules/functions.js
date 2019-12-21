@@ -225,7 +225,7 @@ module.exports = (client) => {
 			.setURL(url)
 			.setImage(options.image)
 			.setTimestamp(options.timestamp ? timestampToDate(options.timestamp) : null)
-			.setFooter(options.footer === true ? randomFooter() : (options.footer ? options.footer : ''), options.footer ? global.bot.user.avatarURL : undefined)
+			.setFooter(options.footer === true ? randomFooter() : (options.footer ? options.footer : ''), options.footer ? client.user.avatarURL : undefined)
 			.setAuthor(options.author === undefined ? '' : options.author)
 			.setThumbnail(options.thumbnail);
 	};
