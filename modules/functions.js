@@ -169,24 +169,83 @@ module.exports = (client) => {
 	};
 
 	const randomColor = () => [
-    	Math.floor(Math.random() * 256),
-    	Math.floor(Math.random() * 256),
-    	Math.floor(Math.random() * 256)
+		Math.floor(Math.random() * 256),
+		Math.floor(Math.random() * 256),
+		Math.floor(Math.random() * 256)
 	];
 
 	const randomFooter = () => {
-    	return randomSelection([
-    	    'just add water!',
-    	    'Powered by squirrels!',
-    	    'codeisluvcodeislife',
-    	    'Where did you get that?',
-    	    'WHAT DID YOU BREAK!?',
-    	    'D-D-D-DROP THE BASS',
-    	   	'Eat, Sleep, JavaScript',
-    	    '#BlameRhearmas',
-    	    'SharpBot was the best, right?',
-    	    'I like turtles',
-    	    'Hi mom!'
-    	]);
+		return randomSelection([
+			'just add water!',
+			'Powered by squirrels!',
+			'codeisluvcodeislife',
+			'Where did you get that?',
+			'WHAT DID YOU BREAK!?',
+			'D-D-D-DROP THE BASS',
+			'Eat, Sleep, JavaScript',
+			'#BlameRhearmas',
+			'SharpBot was the best, right?',
+			'I like turtles',
+			'Hi mom!'
+		]);
+	};
+
+	const timestampToDate = timestamp => {
+		if (timestamp === true) {
+			return new Date();
+		}
+		if (typeof timestamp === 'number') {
+			return new Date(timestamp);
+		}
+		return timestamp;
+	};
+
+	const parseArgs = (args, options) => {
+		if (!options)
+			return args;
+		if (typeof options === 'string')
+			options = [options];
+
+		let optionValues = {};
+
+		let i;
+		for (i = 0; i < args.length; i++) {
+			let arg = args[i];
+			if (!arg.startsWith('-')) {
+				break;
+			}
+
+			let label = arg.substr(1);
+
+			if (options.indexOf(label + ':') > -1) {
+				let leftover = args.slice(i + 1).join(' ');
+				let matches = leftover.match(/^"(.+?)"/);
+				if (matches) {
+					optionValues[label] = matches[1];
+					i += matches[0].split(' ').length;
+				} else {
+					i++;
+					optionValues[label] = args[i];
+				}
+			} else if (options.indexOf(label) > -1) {
+				optionValues[label] = true;
+			} else {
+				break;
+			}
+		}
+
+		return {
+			options: optionValues,
+			leftover: args.slice(i)
+		};
+	};
+
+	const multiSend = (channel, messages, delay) => {
+		delay = delay || 100;
+		messages.forEach((m, i) => {
+			setTimeout(() => {
+				channel.send(m);
+			}, delay * i);
+		});
 	};
 };
