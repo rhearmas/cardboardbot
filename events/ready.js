@@ -1,7 +1,4 @@
 module.exports = async client => {
-  // Log that the bot is online.
-  client.logger.log(`${client.user.tag}, ready to serve ${client.users.size} users in ${client.guilds.size} servers.`, "ready");
-
-  // Make the bot "play the game" which is the help command with default prefix.
-  client.user.setActivity(`${client.users.size} members | ${client.settings.get("default").prefix}help`, {type: "WATCHING"});
+  client.logger.log(`${client.user.tag}, ready to serve ${client.users.filter(user => !user.bot).size} users in ${client.guilds.size} ${client.guilds.size > 1 ? "servers" : "server"}.`, "ready");
+  client.user.setActivity(`${client.users.filter(user => !user.bot).size} humans | ${client.settings.get("default").prefix}help`, {type: "WATCHING"});
 };
