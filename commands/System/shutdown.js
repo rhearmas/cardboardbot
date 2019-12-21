@@ -1,3 +1,4 @@
+exports.run = async (client, message, args, level) => {
   message.delete();
   client.user.setStatus("idle");
 
