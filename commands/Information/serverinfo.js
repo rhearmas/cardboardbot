@@ -4,6 +4,8 @@ const now = new Date();
 dateFormat(now, 'dddd, mmmm dS, yyyy, h:MM:ss TT');
 
 exports.run = async (client, message, args, level) => {
+	message.delete();
+	
 	const millis = new Date().getTime() - message.guild.createdAt.getTime();
 	const days = millis / 1000 / 60 / 60 / 24;
 
