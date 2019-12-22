@@ -32,7 +32,7 @@ If you're really wanting to use this bot yourself, let's go over what you need a
    - After doing either of those steps, clone the repository by running `git clone https://github.com/rhearmas/cardboardbot.git` through your terminal.
 2. When `git` has finished, `cd` into the newly-created folder for the repository.
 3. Run `npm install`. This installs all the prerequisites for the bot through **Node package manager**, which is bundled with `node`.
-   - If you get any error about python or msibuild.exe or binding, read the requirements section again and make sure you've installed **everything**.
+   - If you get any errors about python or msibuild.exe or binding, read the requirements section again and make sure you've installed **everything**.
 4. Run `node setup.js` to get a configuration file added.
 
 ## Running the bot
@@ -45,7 +45,7 @@ Generate an OAuth link for your bot. Use [this delicious link](https://finiterea
 
 <h1 align="center">Credits</h1>
 
-- [SharpBot, a selfbot for Discord](https://github.com/RayzrDev/SharpBot) was actually my source for most of these cool commands! Huge kudos for making a cool selfbot.
+- [SharpBot, a selfbot for Discord](https://github.com/RayzrDev/SharpBot) was actually my source for most of these cool commands! Huge kudos to [RayzrDev](https://github.com/RayzrDev) for making a cool selfbot.
 
 - This was initially an edit to [GuideBot, the boilerplate example bot in Discord.js](https://github.com/AnIdiotsGuide/guidebot). It has some minor edits to the base code, but most of the basic stuff came from this very example bot.
 
