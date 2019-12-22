@@ -6,9 +6,9 @@ let baseConfig = fs.readFileSync("./config_base.txt", "utf8");
 
 const defaultSettings = {
   "prefix": "/",
-  "modLogChannel": "nsa-survellience-system",
-  "modRole": "modinator",
-  "adminRole": "adminator",
+  "modLogChannel": "logs",
+  "modRole": "Moderator",
+  "adminRole": "Administrator",
   "systemNotice": "true",
   "welcomeChannel": "welcome",
   "welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
