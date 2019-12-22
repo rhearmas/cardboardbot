@@ -39,6 +39,7 @@ exports.run = async (client, message, args, level) => {
   message.delete();
 
   if (args.length < 1) {
+  	message.delete();
 		return (await message.reply("Please specify something to ask of the magic 8-ball!")).delete(5000);
 	}
 
