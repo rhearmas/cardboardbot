@@ -27,7 +27,7 @@ If you're really wanting to use this bot yourself, let's go over what you need a
 
 1. Head on over to your terminal (preferrably **Command Prompt**) and clone the repository.
    - If you want to clone to a specific folder, you have two options:
-	   - **`cd` into your desired folder.** For example, if you wanted to clone the repository into Documents, opening the terminal normally and run `cd C:/Users/<user>/Documents`.
+	   - **`cd` into your desired folder.** For example, if you wanted to clone the repository into Documents, open the terminal normally and run `cd C:/Users/<user>/Documents`.
 	   - Open the terminal in a specific folder by doing **Shift-Rightclick => Open <Powershell/command terminal> here**.
    - After doing either of those steps, clone the repository by running `git clone https://github.com/rhearmas/cardboardbot.git` through your terminal.
 2. When `git` has finished, `cd` into the newly-created folder for the repository.
