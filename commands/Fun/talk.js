@@ -14,8 +14,7 @@ exports.run = async (client, message, args) => {
 	if(args[0].startsWith('<#') && args[0].endsWith('>')) {
 		location = args[0].slice(2, -1);
 		location = guild.channels.find(c => c.id === location);
-		msg = msg.replace(/[0-9]+/g, "");
-		msg = msg.replace(/[$<#> ]+/g, "");
+		msg = msg.replace(/[0-9]+/g, "").replace(/[$<#>]+/g, "").slice(1);
 		console.log(`msg is ${msg}`)
 	}
 	
