@@ -5,7 +5,7 @@ exports.run = async (client, message, args, level) => {
 		message.delete();
 		return (await message.channel.send("Please provide some text to clapify")).delete(5000);
 	}
-
+  message.delete();
 	message.channel.send(args.map(randomizeCase).join(':clap:'));
 };
 

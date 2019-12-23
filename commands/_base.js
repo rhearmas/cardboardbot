@@ -19,3 +19,12 @@ exports.help = {
 };
 
 */
+
+/* Basic message auto-deletion
+
+if (!args[0]) {
+	message.delete();
+	return (await message.reply("text")).delete(5000);
+}
+
+*/

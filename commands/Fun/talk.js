@@ -4,13 +4,21 @@ exports.run = async (client, message, args) => {
 	msg = args.join(" ");
 	await message.delete();
 	
-	if(args.length == 0)
-		return message.reply("Please insert a valid message.")
-	.then(msg => {
-		msg.delete(5000).catch(e => {e})
-	})
+	if(args.length === 0) {
+		return (await message.reply("please insert a valid message.")).delete(5000);
+	}
+
+	let location = message.channel;
+	guild = message.guild;
+
+	if(args[0].startsWith('<#') && args[0].endsWith('>')) {
+		location = args[0].slice(2, -1);
+		location = guild.channels.find(c => c.id === location);
+		msg = msg.slice(args[0].length);
+		console.log(`msg is ${msg}`)
+	}
 	
-	message.channel.send(msg);
+	location.send(msg);
 }
 
 exports.conf = {
@@ -24,5 +32,5 @@ exports.help = {
   name: "talk",
   category: "Fun",
   description: "Talk as the bot in the current channel you're in.",
-  usage: "talk text"
+  usage: "talk <text>"
 };

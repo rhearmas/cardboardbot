@@ -38,9 +38,9 @@ function randomItem(array) {
 exports.run = async (client, message, args, level) => {
   message.delete();
 
-  if (args.length < 1) {
-  	message.delete();
-		return (await message.reply("Please specify something to ask of the magic 8-ball!")).delete(5000);
+  if (!args[0]) {
+		message.delete();
+		return (await message.reply("text")).delete(5000);
 	}
 
 	let response = randomItem(responses);
