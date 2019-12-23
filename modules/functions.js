@@ -154,6 +154,8 @@ module.exports = (client) => {
 	
 	client.wait = require("util").promisify(setTimeout);
 
+	client.randomSelection = choices => choices[Math.floor(Math.random() * choices.length)];
+
 	process.on("uncaughtException", (err) => {
 		const errorMsg = err.stack.replace(new RegExp(`${__dirname}/`, "g"), "./");
 		client.logger.error(`Uncaught Exception: ${errorMsg}`);
@@ -363,4 +365,6 @@ module.exports = (client) => {
 				}
 			});
 	};
+
+	client.quoteRegex = input => `${input}`.replace(/[.?*+^$[\]\\(){}|-]/g, '\\$&');
 };

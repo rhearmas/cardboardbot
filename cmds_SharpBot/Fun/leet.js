@@ -21,7 +21,7 @@ const getInverseReplacements = replacements => {
 };
 
 exports.run = function (bot, message, args) {
-    const parsedArgs = bot.utils.parseArgs(args, ['e', 't']);
+    const parsedArgs = client.parseArgs(args, ['e', 't']);
 
     if (parsedArgs.leftover.length < 1) {
         throw 'Provide text to be leeted.';

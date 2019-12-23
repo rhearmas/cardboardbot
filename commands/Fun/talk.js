@@ -5,7 +5,7 @@ exports.run = async (client, message, args) => {
 	await message.delete();
 	
 	if(args.length == 0)
-		return message.reply("Please insert a valid message.")
+		return message.reply("please insert a valid message.")
 	.then(msg => {
 		msg.delete(5000).catch(e => {e})
 	})
