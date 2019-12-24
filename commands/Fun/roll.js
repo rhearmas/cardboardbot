@@ -30,7 +30,8 @@ exports.run = async (client, message, args, level) => {
 			}
 		],
 		{
-			footer: `Rolled by ${message.author.tag}`
+			author: `Rolled by ${message.author.tag}`,
+			authorURL: message.author.avatarURL
 		}
 	);
 

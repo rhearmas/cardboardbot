@@ -189,8 +189,8 @@ module.exports = (client) => {
 			.setURL(url)
 			.setImage(options.image)
 			.setTimestamp(options.timestamp ? timestampToDate(options.timestamp) : null)
-			.setFooter(options.footer === true ? randomFooter() : (options.footer ? options.footer : ''), options.footer ? client.user.avatarURL : undefined)
-			.setAuthor(options.author === undefined ? '' : options.author)
+			.setFooter(options.footer === true ? randomFooter() : (options.footer ? options.footer : ''), options.footerIcon === true ? options.footerIcon : client.user.avatarURL)
+			.setAuthor(options.author === undefined ? '' : options.author, options.authorIcon)
 			.setThumbnail(options.thumbnail);
 	};
 

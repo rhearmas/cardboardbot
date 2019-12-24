@@ -41,7 +41,12 @@ exports.run = (client, message, args, level) => {
 					value: command.conf.aliases.join(", ") !== "" ? command.conf.aliases.join(", ") : "none",
 					inline: true
 				}
-			])});
+			],
+			{
+				author: message.author.tag,
+				authorIcon: message.author.avatarURL
+			})
+		});
 		}
 	}
 };
