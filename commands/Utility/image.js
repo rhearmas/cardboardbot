@@ -37,7 +37,7 @@ exports.conf = {
 
 exports.help = {
   name: "image",
-  category: "Utiltiy",
+  category: "Utility",
   description: "Sends an image from a URL.",
   usage: "image <url>"
 };
