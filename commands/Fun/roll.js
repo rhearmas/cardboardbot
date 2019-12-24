@@ -13,7 +13,7 @@ exports.run = async (client, message, args, level) => {
 	footer += `:game_die: **${args[0]}**`;
 	if (args.length > 1) {
 		reason = args.splice(1).join(' ');
-		footer += ` | ${reason}`;
+		footer += ` | Reason: ${reason}`;
 	}
 
 	let results = roller.roll(args[0]);
@@ -28,7 +28,10 @@ exports.run = async (client, message, args, level) => {
 				name: '\u200b',
 				value: footer
 			}
-		]
+		],
+		{
+			footer: `Rolled by ${message.author.tag}`
+		}
 	);
 
 	message.channel.send({ embed });
