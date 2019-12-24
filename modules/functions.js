@@ -19,7 +19,7 @@ module.exports = (client) => {
 	};
 	
 	const defaultSettings = {
-		"prefix": "/",
+		"prefix": "b&",
 		"modLogChannel": "mod-log",
 		"modRole": "modinator",
 		"adminRole": "adminator",
