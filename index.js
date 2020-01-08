@@ -38,7 +38,7 @@ const init = async () => {
 	await crawl("commands",cmdFiles);
 	client.logger.log(`Loading a total of ${cmdFiles.length} commands.`);
 	cmdFiles.forEach(f => {
-		if (!f.endsWith(".js") || !f.startsWith("_")) return;
+		if (!f.endsWith(".js") || f.startsWith("commands\\_")) return;
 		const response = client.loadCommand(f);
 		if (response) console.log(response);
 	});
