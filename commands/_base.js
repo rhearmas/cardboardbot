@@ -1,5 +1,3 @@
-/* make sure these aren't commented
-
 exports.run = async (client, message, args, level) => {
   
 };
@@ -18,13 +16,8 @@ exports.help = {
   usage: ""
 };
 
-*/
-
-/* Basic message auto-deletion
-
+// Basic message auto-deletion
 if (!args[0]) {
-	message.delete();
-	return (await message.reply("text")).delete(5000);
+  message.delete();
+  return (await message.reply("text")).delete(5000);
 }
-
-*/
