@@ -25,5 +25,5 @@ exports.help = {
   category: "Utility",
   description: "Set the slowmode for a channel. If no arguments are provided, this command will disable it.",
   emoji: "sparkle",
-  usage: "slowmode [time:0]"
+  usage: "slowmode <time>"
 };
