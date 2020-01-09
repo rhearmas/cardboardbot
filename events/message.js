@@ -38,7 +38,7 @@ module.exports = async (client, message) => {
       {
         author: message.author.tag,
         authorIcon: message.author.avatarURL
-      }
+      })
     });
     } else {
       return;
