@@ -10,7 +10,7 @@ exports.run = async (client, message, args, level) => {
 	let user = message.mentions.users.first() || message.author;
 	let member = message.guild.member(user);
   
-  if (!member) {
+  	if (!member) {
 		message.delete();
 		return (await message.reply("that member could not be found!")).delete(5000);
 	}
@@ -21,10 +21,10 @@ exports.run = async (client, message, args, level) => {
 	const millisJoined = new Date().getTime() - member.joinedAt.getTime();
 	const daysJoined = millisJoined / 1000 / 60 / 60 / 24;
   
-  let roles = member.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
+  	let roles = member.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
 	if (roles.length < 1) roles = ['None'];
   
-  let game = (user.presence.game && user.presence.game && user.presence.game.name) || 'Not playing a game.'
+  	let game = (user.presence.game && user.presence.game && user.presence.game.name) || 'Not playing a game.'
 	
 	await message.delete();
 	message.channel.send({ embed: client.embed(
