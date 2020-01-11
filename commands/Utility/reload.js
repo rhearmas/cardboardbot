@@ -1,7 +1,7 @@
 exports.run = async (client, message, args, level) => {
 	message.delete();
 
-	if (!args || args.length < 1) return msg.edit("Why are you trying to reload a command without actually naming it?").then(msg => {
+	if (!args || args.length < 1) return message.reply("why are you trying to reload a command without actually naming it?").then(msg => {
 		msg.delete(5000);
 	});
 	
@@ -9,7 +9,7 @@ exports.run = async (client, message, args, level) => {
 	const command = message.client.commands.get(commandName)
 		|| message.client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-	if (!command) return msg.edit(`There is no command with name or alias \`${commandName}\`, ${message.author}.`).then(msg => {
+	if (!command) return message.reply(`there is no command with name or alias \`${commandName}\`, ${message.author}.`).then(msg => {
 		msg.delete(5000);
 	});
 	let msg = await message.channel.send(`**Beginning reload process;** initiated by ${message.author.tag}. Finding and reloading command \`${args[0]}\`...`);
