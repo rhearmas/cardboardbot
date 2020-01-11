@@ -1,10 +1,6 @@
-function titleCase(str) {
-  str = str.toLowerCase().split(' ');
-  for (let i = 0; i < str.length; i++) {
-    str[i] = str[i].charAt(0).toUpperCase() + str[i].slice(1); 
-  }
-  return str.join(' ');
-}
+const dateFormat = require('dateformat');
+
+dateFormat('dddd, mmmm dS, yyyy, h:MM:ss TT');
 
 exports.run = async (client, message, args, level) => {
 	let user = message.mentions.users.first() || message.author;
@@ -22,14 +18,14 @@ exports.run = async (client, message, args, level) => {
 	const daysJoined = millisJoined / 1000 / 60 / 60 / 24;
   
   	let roles = member.roles.array().slice(1).sort((a, b) => a.comparePositionTo(b)).reverse().map(role => role.name);
-	if (roles.length < 1) roles = ['None'];
+    if (roles.length < 1) roles = ['None'];
   
   	let game = (user.presence.game && user.presence.game && user.presence.game.name) || 'Not playing a game.'
 	
 	await message.delete();
 	message.channel.send({ embed: client.embed(
-		`User info: ${target.user.tag}`,
-		"**This message will be deleted in 60 seconds. :bomb:",
+		`User info: ${member.user.tag}`,
+		"**This message will be deleted in 60 seconds.** :bomb:",
 		[
 			{
 				name: "= Status =",
@@ -41,61 +37,49 @@ exports.run = async (client, message, args, level) => {
 			},
 			{
 				name: "= Nickname =",
-				value: target.guildMember.nickname,
-				inline: true
+				value: member.nickname || "None"
 			},
 			{
 				name: "= Unique User ID (UUID) =",
-				value: target.user.id,
-				inline: true
-			},
-			{
-				name: "= Shared Servers =",
-				value: target.userProfile.mutualGuilds,
-				inline: true
+				value: member.user.id !== null ? member.user.id : "Unknown"
 			},
 			{
 				name: "= Account Creation Date =",
-				value: dateFormat(user.createdAt),
-				inline: true
+				value: dateFormat(user.createdAt) !== null ? dateFormat(user.createdAt) : "Unknown"
 			},
 			{
 				name: "= Days Since Creation =",
-				value: daysCreated.toFixed(0),
-				inline: true
-			}
+				value: daysCreated.toFixed(0) !== null ? daysCreated.toFixed(0) : "Unknown"
+			},
 			{
 				name: "= Server Join Date =",
-				value: target.guildMember.joinedAt,
-				inline: true
+				value: member.joinedAt !== null ? member.joinedAt : "Unknown"
 			},
 			{
 				name: "= Days Since Joining =",
-				value: daysJoined.toFixed(0),
-				inline: true
+				value: daysJoined.toFixed(0) !== null ? daysJoined.toFixed(0) : "Unknown"
 			},
 			{
 				name: "= Last Spoken =",
-				value: `**${target.guildMember.lastMessage.createdAt}**, at server **${target.guildMember.lastMessage.guild}**`,
-				inline: true
+				value: member.lastMessage !== null ? `**${member.lastMessage.createdAt}**, at server **${member.lastMessage.guild}**` : "Unknown"
 			},
 			{
 				name: "= User Roles =",
-				value: roles,
-				inline: true
+				value: `\`${roles.join('\`, \`')}\``
 			}
 		],
 		{
 			inline: true,
-			footer: `Sent by ${message.author}`
+			footer: `Sent by ${message.author.tag}`,
 			footerIcon: message.author.avatarURL
-	});
+		})
+	})
 };
 
 exports.conf = {
   enabled: true,
   guildOnly: true,
-  aliases: ["user","uinfo"],
+  aliases: ["user", "uinfo"],
   permLevel: "User"
 };
 
