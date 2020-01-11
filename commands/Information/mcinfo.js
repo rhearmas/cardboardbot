@@ -48,13 +48,13 @@ async function getUUID(username) {
 exports.conf = {
   enabled: true,
   guildOnly: false,
-  aliases: ["mcinfo","minecraftuser"],
+  aliases: ["minecraftuser"],
   permLevel: "User"
 };
 
 exports.help = {
-  name: "playerinfo",
+  name: "mcinfo",
   category: "Information",
   description: "Shows information about a Minecraft player.",
-  usage: "playerinfo <username>"
+  usage: "mcinfo <username>"
 };
