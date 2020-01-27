@@ -1,6 +1,6 @@
 /*
-This file is ignored by the bot's command loader because of the underscore at the start of the file name. No need to worry about loading errors.
-Use the list of export functions in your custom commands to get a headstart on making your commands. All theee exports are required, or the command won't load.
+This file is ignored by the bot's command loader because of the underscore at the start of the file name. The purpose of this file is for developers to get a headstart on implementing their own commands.
+Developers, remember to insert all three exports; these are required. Your command won't load if any of these are missing.
 */
 
 exports.run = async (client, message, args, level) => {
