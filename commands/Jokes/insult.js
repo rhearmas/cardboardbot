@@ -3,13 +3,13 @@ const middle = ["douche", "ass", "turd", "rectum", "butt", "shit", "crotch", "tu
 const end = ["pilot", "canoe", "captain", "pirate", "hammer", "knob", "box", "jockey", "nazi", "waffle", "goblin", "blossom", "biscuit", "clown", "socket", "monster", "hound", "dragon", "balloon", "apple-john", "baggage", "barnacle", "bladder", "boar-pig", "bugbear", "bum-bailey", "canker-blossom", "clack-dish", "clotpole", "coxcomb", "codpiece", "death-token", "dewberry", "flap-dragon", "flax-wench", "flirt-gill", "foot-licker", "fustilarian", "giglet", "gudgeon", "haggard", "harpy", "hedge-pig", "horn-beast", "hugger-mugger", "joithead", "lewdster", "lout", "maggot-pie", "malt-worm", "mammet", "measle", "minnow", "miscreant", "moldwarp", "mumble-news", "nut-hook", "pigeon-egg", "pignut", "puttock", "pumpion", "ratsbane", "scut", "skinsmate", "strumpet", "varlot", "vassal", "whey-face", "wagtail", "squeegee", "turtle", "cabbage", "bomb", "sniffer", "binkie", "stump", "nugget", "whistle", "twig", "knuckle", "burger", "hotdog", "loaf", "freckle", "soldier", "kernal", "shingle", "warrior", "hemorrhoid", "fuckface", "asshole", "scumbucket", "toerag", "hackwack", "imbecile", "stunodigan", "maggot", "hipster", "gargabe", "jerkstore"]; // eslint-disable-line
 
 exports.run = async (client, message, args, level) => {
-	if(args.length < 1) return;
-	
 	let target = message.author;
-	if(message.guild && message.mentions) {
-		target = message.mentions.first;
+
+	if(args[0]) {
+		target = args[0];
 	}
 	
+  message.delete();
 	message.channel.send(`Hey ${target}, you're nothing but ${start[Math.floor(Math.random() * start.length)]} ${middle[Math.floor(Math.random() * middle.length)]} ${end[Math.floor(Math.random() * end.length)]}.`);
 };
 

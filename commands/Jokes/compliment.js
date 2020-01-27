@@ -12,18 +12,18 @@ const Compliments = [
     "You are really courageous.", "Your kindness is a balm to all who encounter it.", "You're all that and a super-size bag of chips.",
     "On a scale from 1 to 10, you're an 11.", "You are strong.", "You're even more beautiful on the inside than you are on the outside.",
     "You have the courage of your convictions.", "I'm inspired by you.", "You're like a ray of sunshine on a really dreary day.",
-    "You are making a difference.", "Thank you for being there for me.", "You bring out the best in other people., "You make the rating scale skyrocket through the roof!""
+    "You are making a difference.", "Thank you for being there for me.", "You bring out the best in other people.", "You make the rating scale skyrocket through the roof!"
 ];
 
 exports.run = async (client, message, args, level) => {
-  if(args.length < 1) return;
-	
-	let target = message.author;
-	if(message.guild && message.mentions) {
-		target = message.mentions.first;
-	}
-	
-	message.channel.send(`Hey, ${target}! Wanna know something? ${Compliments[Math.floor(Math.random() * Compliments.length)]}\nBe sure to thank ${message.author} for the compliment!`);
+  let target = message.author;
+
+  if(args[0]) {
+    target = args[0];
+  }
+
+	message.delete();
+	message.channel.send(`Hey, ${target}! Wanna know something? ${Compliments[Math.floor(Math.random() * Compliments.length)]}`);
 };
 
 exports.conf = {
