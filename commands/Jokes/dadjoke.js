@@ -1,7 +1,7 @@
 exports.run = async (client, message, args, level) => {
-  const { joke } = await this.fetchURL("https://icanhazdadjoke.com/", { headers: { Accept: "application/json" } });
+  const { joke } = await client.fetchURL("https://icanhazdadjoke.com/", { headers: { Accept: "application/json" } });
 	
-	return message.channel.send({ embed: client.embed(`Funny Dad Joke from ${client.user.username}`, joke.length < 1900 ? joke : `${joke.substring(0, 1900)}...`,
+	return message.channel.send({ embed: client.embed(`Funny Dad Joke from ${client.user.username}`, joke,
 		{
 			author: message.author.tag,
 			authorIcon: message.author.avatarURL,
@@ -20,6 +20,6 @@ exports.conf = {
 exports.help = {
   name: "dadjoke",
   category: "Jokes",
-  description: `Hey ${message.author}, I'm dad!`,
+  description: `Hey there kiddo, I'm dad!`,
   usage: "dadjoke"
 };
