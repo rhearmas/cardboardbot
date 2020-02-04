@@ -22,6 +22,7 @@ If you're really wanting to use this bot yourself, let's go over what you need a
   - [Macintosh](https://git-scm.com/download/mac)
 - `node` version [8.0.0 or higher](https://nodejs.org).
 - Your **Discord bot token.** Read the first section of [this page](https://anidiots.guide/getting-started/the-long-version.html) on how to snag it.
+- `Python`. Install it from [here](https://www.python.org/downloads).
 
 ## Installation
 
