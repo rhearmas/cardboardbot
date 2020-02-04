@@ -1,5 +1,6 @@
 const Discord = require("discord.js");
 const got = require("got");
+const fetch = require("node-fetch");
 
 module.exports = (client) => {
 	client.permlevel = message => {
@@ -328,4 +329,11 @@ module.exports = (client) => {
 	};
 
 	client.quoteRegex = input => `${input}`.replace(/[.?*+^$[\]\\(){}|-]/g, '\\$&');
+
+	client.fetchURL = (url, options = {}) => {
+        options.headers = options.headers ? { ...options.headers, "User-Agent": client.user } : { "User-Agent": client.user };
+        return fetch(url, options, options.type || "json").catch(error => {
+            client.Logger.error(error);
+        });
+    }
 };
