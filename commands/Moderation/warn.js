@@ -1,9 +1,9 @@
 exports.run = async (client, message, args, level) => {
   const user = message.mentions.users.first();
-  parseUser(message, user);
-  const modlog = client.channels.find('name', 'mod-log');
+  client.parseUser(message, user);
+  const modlog = client.channels.find('name', config.modLogChannel);
   const caseNum = await caseNumber(client, modlog);
-  if (!modlog) return message.reply('I cannot find a modlog channel');
+  if (!modlog) return message.reply('I cannot find a modlog channel.');
   if (message.mentions.users.size < 1) return message.reply('You must mention someone to warn them.').catch(console.error);
 
   const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${message.settings.prefix}reason ${caseNum} <reason>.`;
