@@ -1,5 +1,5 @@
 exports.run = async (client, message, args, level) => {
-	const data = await this.fetchURL("https://uselessfacts.jsph.pl/random.json");
+	const data = await fetchURL("https://uselessfacts.jsph.pl/random.json");
 
 	return message.channel.send({ embed: client.embed(`Fun fact!`, data.text, [
 		{
