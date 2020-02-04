@@ -1,5 +1,5 @@
 exports.run = async (client, message, args, level) => {
-  const user = message.mentions.users.first();
+  const user = message.mentions.users.first() || client.users.get("username", args[0]).id;
   parseUser(message, user);
   const modlog = client.channels.find('name', config.modLogChannel);
   const caseNum = await caseNumber(client, modlog);
