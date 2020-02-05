@@ -8,7 +8,7 @@ exports.run = async (client, message, args, level) => {
 
   const reason = args.splice(1, args.length).join(' ') || `Awaiting moderator's input. Use ${message.settings.prefix}reason ${caseNum} <reason>.`;
   const embed = new RichEmbed()
-  	.setColor(0x00AE86)
+  	.setColor(0x2f3136)
   	.setTimestamp()
   	.setDescription(`**Action:** Warning\n**Target:** ${user.tag}\n**Moderator:** ${message.author.tag}\n**Reason:** ${reason}`)
   	.setFooter(`Case ${caseNum}`);
