@@ -16,8 +16,10 @@ exports.run = async (client, message, args, level) => {
 			commands = client.commands(args[1]);
 			title = `== Commands under category ${args[1]} ==`;
 		} else if(/^all|full|every$/i.test(args[0])) {
+			commands = message.guild ? client.commands ? client.commands.filter (cmd => cmd.conf.guildOnly !== true);
+		} else if(/^mine|usable$/i.test(args[0])) {
 			commands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
-		} else {
+		}
 			let command = args[0];
 			if (client.commands.has(command)) {
 				command = client.commands.get(command);
