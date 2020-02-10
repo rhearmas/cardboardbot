@@ -8,22 +8,23 @@ exports.run = async (client, message, args, level) => {
 	let title = "Categories";
 
 	if(args[0]) {
-		if(/^category|type$/i.test(args[0])) {
-			if(!args[2]) {
+		if(args[0] === "category" || args[0] === "type") {
+			if(!args[1]) {
 				return (await message.reply("you must specify a valid category!")).delete(5000).catch(() => { });
 			}
-
-			commands = client.commands(args[1]);
-			title = `== Commands under category ${args[1]} ==`;
-		} else if(/^all|full|every$/i.test(args[0])) {
-			commands = message.guild ? client.commands : client.commands.filter (cmd => cmd.conf.guildOnly !== true);
-		} else if(/^mine|usable$/i.test(args[0])) {
+			commands = client.commands.filter(cmd => cmd.help.category === args[1]);
+			title = `== ${args[1]} commands ==`;
+		} else if(args[0] === "all" || args[0] === "full" || args[0] === "every") {
 			commands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
-		}
+			title = "== All Commands =="
+		} else if(args[0] === "mine" || args[0] === "usable") {
+			commands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
+		} else {
 			let command = args[0];
 			if (client.commands.has(command)) {
 				command = client.commands.get(command);
 				if (level < client.levelCache[command.conf.permLevel]) return;
+
 				message.channel.send({embed: client.embed(`Command information: "${command.help.name}"`, command.help.description, [
 					{
 						name: 'Category',
@@ -84,9 +85,10 @@ exports.run = async (client, message, args, level) => {
 		let categories;
 		(await message.channel.send({
 			embed: client.embed(title,stripIndents
-			// **Available categories:**
-			// ${categories.map(c => `- __${c}__`).join('\n')}
-			`**Usage:**
+			`**Available categories:**
+			${categories.map(c => `- __${c}__`).join('\n')}
+
+			**Usage:**
 			Do \`${message.settings.prefix}help category <name>\` for a list of comamnds in a specific category.
 			Do \`${message.settings.prefix}help all\` for a list of every command available for this bot and your permission level.
 			Do \`${message.settings.prefix}help <command>\` for **extended** command help and options.`)
