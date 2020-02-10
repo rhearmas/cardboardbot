@@ -15,10 +15,11 @@ exports.run = async (client, message, args, level) => {
 			commands = client.commands.filter(cmd => cmd.help.category === args[1]);
 			title = `== ${args[1]} commands ==`;
 		} else if(args[0] === "all" || args[0] === "full" || args[0] === "every") {
-			commands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
+			commands = message.guild ? client.commands : client.commands.filter(cmd.conf.guildOnly !== true);
 			title = "== All Commands =="
 		} else if(args[0] === "mine" || args[0] === "usable") {
-			commands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level &&  cmd.conf.guildOnly !== true);
+			commands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level && cmd.conf.guildOnly !== true);
+			title = `== ${message.author.username}'s Usable Commands ==`
 		} else {
 			let command = args[0];
 			if (client.commands.has(command)) {
