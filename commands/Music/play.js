@@ -1,19 +1,4 @@
-function play(connection, message) {
-  var server = servers[message.guild.id];
-
-  server.dispatcher = connection.playStream(ytdl(server.queue[0],{filter: "audioonly"}));
-  server.queue.shift();
-  server.dispatcher.on("end", function() {
-    if(server.queue[0]) {
-      play(connection, message);
-    } else {
-      connection.disconnect();
-    }
-  })
-};
-
 const ytdl = require("ytdl-core");
-var servers = {};
 
 exports.run = async (client, message, args, level) => {
   if(!args[1] || args[1].startsWith("https://")) return (await message.reply("you need to provide a valid URL!")).delete(5000).catch(() => { });
@@ -27,7 +12,7 @@ exports.run = async (client, message, args, level) => {
   server.queue.push(args[1]);
 
   if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-    play(connection, message);
+    client.play(connection, message);
   })
 };
 

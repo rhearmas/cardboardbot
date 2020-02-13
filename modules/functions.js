@@ -18,7 +18,7 @@ module.exports = (client) => {
 		}
 		return permlvl;
 	};
-	
+
 	const defaultSettings = {
 		"prefix": "b&",
 		"modLogChannel": "mod-log",
@@ -29,14 +29,14 @@ module.exports = (client) => {
 		"welcomeMessage": "Say hello to {{user}}, everyone! We all need a warm welcome sometimes :D",
 		"welcomeEnabled": "false"
 	};
-	
+
 	client.getSettings = (guild) => {
 		client.settings.ensure("default", defaultSettings);
 		if(!guild) return client.settings.get("default");
 		const guildConf = client.settings.get(guild.id) || {};
 		return ({...client.settings.get("default"), ...guildConf});
 	};
-	
+
 	client.awaitReply = async (msg, question, limit = 60000) => {
 		const filter = m => m.author.id === msg.author.id;
 		await msg.channel.send(question);
@@ -47,22 +47,22 @@ module.exports = (client) => {
 			return false;
 		}
 	};
-	
+
 	client.caseNumber = async (client, modlog) {
   		const messages = await modlog.fetchMessages({limit:5});
-  		
+
   		const log = messages.filter(m => m.author.id === client.user.id &&
     			m.embeds[0] &&
     			m.embeds[0].type === 'rich' &&
     			m.embeds[0].footer &&
     			m.embeds[0].footer.text.startsWith('Case')
   		).first();
-  		
+
   		if (!log) return 1;
   		const thisCase = /Case\s(\d+)/.exec(log.embeds[0].footer.text);
   		return thisCase ? parseInt(thisCase[1]) + 1 : 1;
 	};
-	
+
 	client.clean = async (client, text) => {
 		if (text && text.constructor.name == "Promise")
 			text = await text;
@@ -94,41 +94,41 @@ module.exports = (client) => {
 		}
 	};
 
-	client.unloadCommand = async (commandName) => {	
-		let command;	
-		if (client.commands.has(commandName)) {	
-			command = client.commands.get(commandName);	
-		} else if (client.aliases.has(commandName)) {	
-			command = client.commands.get(client.aliases.get(commandName));	
-		}	
-		if (!command) return `The command \`${commandName}\` doesn\'t seem to exist, nor is it an alias. Try again!`;	
+	client.unloadCommand = async (commandName) => {
+		let command;
+		if (client.commands.has(commandName)) {
+			command = client.commands.get(commandName);
+		} else if (client.aliases.has(commandName)) {
+			command = client.commands.get(client.aliases.get(commandName));
+		}
+		if (!command) return `The command \`${commandName}\` doesn\'t seem to exist, nor is it an alias. Try again!`;
 
-		if (command.shutdown) {	
-			await command.shutdown(client);	
-		}	
-		const mod = require.cache[require.resolve(`../commands/${command.help.category}/${command.help.name}`)];	
-		delete require.cache[require.resolve(`../commands/${command.help.category}/${command.help.name}.js`)];	
-		for (let i = 0; i < mod.parent.children.length; i++) {	
-			if (mod.parent.children[i] === mod) {	
-				mod.parent.children.splice(i, 1);	
-				break;	
-			}	
-		}	
-		return false;	
+		if (command.shutdown) {
+			await command.shutdown(client);
+		}
+		const mod = require.cache[require.resolve(`../commands/${command.help.category}/${command.help.name}`)];
+		delete require.cache[require.resolve(`../commands/${command.help.category}/${command.help.name}.js`)];
+		for (let i = 0; i < mod.parent.children.length; i++) {
+			if (mod.parent.children[i] === mod) {
+				mod.parent.children.splice(i, 1);
+				break;
+			}
+		}
+		return false;
 	};
-	
+
 	Object.defineProperty(String.prototype, "toProperCase", {
 		value: function() {
 			return this.replace(/([^\W_]+[^\s-]*) */g, (txt) => txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase());
 		}
 	});
-	
+
 	Object.defineProperty(Array.prototype, "random", {
 		value: function() {
 			return this[Math.floor(Math.random() * this.length)];
 		}
 	});
-	
+
 	client.wait = require("util").promisify(setTimeout);
 
 	client.randomSelection = choices => choices[Math.floor(Math.random() * choices.length)];
@@ -346,9 +346,25 @@ module.exports = (client) => {
 	client.quoteRegex = input => `${input}`.replace(/[.?*+^$[\]\\(){}|-]/g, '\\$&');
 
 	client.fetchURL = (url, options = {}) => {
-        options.headers = options.headers ? { ...options.headers, "User-Agent": client.user } : { "User-Agent": client.user };
-        return fetch(url, options, options.type || "json").catch(error => {
-            client.Logger.error(error);
-        });
-    }
+  	options.headers = options.headers ? { ...options.headers, "User-Agent": client.user } : { "User-Agent": client.user };
+    return fetch(url, options, options.type || "json").catch(error => {
+      client.Logger.error(error);
+    });
+  }
+
+	var servers = {};
+
+	client.play = (connection, message) => {
+	  var server = servers[message.guild.id];
+
+	  server.dispatcher = connection.playStream(ytdl(server.queue[0],{filter: "audioonly"}));
+	  server.queue.shift();
+	  server.dispatcher.on("end", function() {
+	    if(server.queue[0]) {
+	      play(connection, message);
+	    } else {
+	      connection.disconnect();
+	    }
+	  })
+	};
 };
