@@ -89,10 +89,13 @@ exports.run = async (client, message, args, level) => {
 			`**Available categories:**
 			${categories.map(c => `- __${c}__`).join('\n')}
 
-			**Usage:**
-			Do \`${message.settings.prefix}help category <name>\` for a list of comamnds in a specific category.
-			Do \`${message.settings.prefix}help all\` for a list of every command available for this bot and your permission level.
-			Do \`${message.settings.prefix}help <command>\` for **extended** command help and options.`)
+			\`\`\`asciidoc
+			== Usage ==
+			${message.settings.prefix}help category <name> :: Provides a list of comamnds in a specific category.
+			${message.settings.prefix}help all :: Shows a list of every command available for this bot.
+			${message.settings.prefix}help mine :: Presents a list of all commands that your permission level has access to.
+			${message.settings.prefix}help <command> :: Sends extended command help and extra options.
+			\`\`\``)
 		})).delete(15000);
 	}
 };
@@ -139,3 +142,22 @@ exports.help = {
 	description: "Displays all the available commands for your permission level.",
 	usage: "help [command]"
 };
+
+/*
+const myCommands = message.guild ? client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level && cmd.help.category === args[1]) : client.commands.filter(cmd => client.levelCache[cmd.conf.permLevel] <= level && cmd.conf.guildOnly !== true && cmd.help.category === args[1]);
+
+const commandNames = myCommands.keyArray();
+const longest = commandNames.reduce((long, str) => Math.max(long, str.length), 0);
+
+let currentCategory = "";
+let output;
+const sorted = myCommands.array().sort((p, c) => p.help.category > c.help.category ? 1 :  p.help.name > c.help.name && p.help.category === c.help.category ? 1 : -1 );
+sorted.forEach( c => {
+	const cat = c.help.category.toProperCase();
+	if (currentCategory !== cat) {
+		output += `\u200b\n== ${cat} ==\n`;
+		currentCategory = cat;
+	}
+	output += `${message.settings.prefix}${c.help.name}${" ".repeat(longest - c.help.name.length)} :: ${c.help.description}\n`;
+});
+*/
