@@ -48,7 +48,7 @@ module.exports = (client) => {
 		}
 	};
 
-	client.caseNumber = async (client, modlog) {
+	client.caseNumber = async (client, modlog) => {
   		const messages = await modlog.fetchMessages({limit:5});
 
   		const log = messages.filter(m => m.author.id === client.user.id &&
