@@ -6,12 +6,12 @@ exports.run = async (client, message, args, level) => {
 	let responsePlace = message.channel;
 	await message.delete();
 
-	const messages = await message.channel.fetchMessages({ limit: Math.min(count, 100), before: message.id });
+	const messages = await message.channel.messages.fetch({ limit: Math.min(count, 100), before: message.id });
 	const deleted = messages.size;
 
 	message.channel.bulkDelete(messages.size);
 
-	(await responsePlace.send(`:white_check_mark: **Cleared \`${messages.size}\` message${deleted === 1 ? '' : 's'}.**`)).delete(2000);
+	(await responsePlace.send(`:white_check_mark: **Cleared \`${messages.size}\` message${deleted === 1 ? '' : 's'}.**`)).delete({timeout: 2000});
 };
 
 exports.conf = {

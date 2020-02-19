@@ -26,7 +26,7 @@
     "crawl": "^0.3.1",
     "dateformat": "^3.0.3",
     "discord-emoji": "^1.1.1",
-    "discord.js": "^11.5.1",
+    "discord.js": "github:discordjs/discord.js",
     "enmap": "^5.0.0",
     "inquirer": "^6.3.1",
     "math-expression-evaluator": "^1.2.17",
