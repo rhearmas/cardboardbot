@@ -1,4 +1,5 @@
 exports.run = async (client, message, args, level) => {
+  /*
   var server = client.servers[message.guild.id];
   if(message.guild.voiceConnection) {
     for(var i = server.queue.length -1; i >= 0; i--) {
@@ -10,6 +11,7 @@ exports.run = async (client, message, args, level) => {
   }
 
   if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
+  */
 
   /*
   const serverQueue = client.queue.get(message.guild.id);

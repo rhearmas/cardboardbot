@@ -15,7 +15,6 @@ client.logger = require("./modules/Logger");
 require("./modules/functions.js")(client);
 client.commands = new Enmap();
 client.aliases = new Enmap();
-client.queue = new Map();
 client.settings = new Enmap({name: "settings"});
 
 /*

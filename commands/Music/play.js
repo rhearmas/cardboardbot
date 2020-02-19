@@ -3,22 +3,7 @@ const ytdl = require("ytdl-core");
 const youtube = new Youtube(process.env.YOUTUBEAPI);
 
 exports.run = async (client, message, args, level) => {
-  /*
-  if(!args[0]) return (await message.reply("you need to provide a valid URL!")).delete(5000).catch(() => { });
-	if(!message.member.voiceChannel) return (await message.reply("you need to be in a voice channel to use this command.")).delete(5000).catch(() => { });
-
-	if(!client.servers[message.guild.id]) client.servers[message.guild.id] = {
-		queue: []
-	}
-
-	var server = client.servers[message.guild.id];
-  server.queue.push(args[0]);
-  message.channel.send(`Added ${args[0]} to the queue.`)
-
-  if(!message.guild.voiceConnection) message.member.voiceChannel.join().then(function(connection) {
-    play(connection, message);
-  })
-  */
+  
 
   /*
   const queue = client.queue;
@@ -64,6 +49,7 @@ exports.run = async (client, message, args, level) => {
   }
   */
 
+  /*
   const query = args[0];
 
   var voiceChannel = message.author.voiceChannel;
@@ -220,6 +206,7 @@ exports.run = async (client, message, args, level) => {
     }
     return message.channel.send("Something went wrong playing one of the songs, is its source private?");
   }
+  */
 };
 
 exports.conf = {
@@ -262,6 +249,7 @@ function play(message, song) {
 };
 */
 
+/*
 function playSong(queue, message) {
   let voiceChannel;
   queue[0].voiceChannel
@@ -327,3 +315,4 @@ function formatDuration(durationObj) {
   }`;
   return duration;
 }
+*/
