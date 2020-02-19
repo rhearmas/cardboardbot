@@ -1,6 +1,7 @@
 if (Number(process.version.slice(1).split(".")[0]) < 8) throw new Error("Node 8.0.0 or higher is required. Update Node on your system.");
 
 const Discord = require("discord.js");
+const { Structures } = require("discord.js");
 
 const { promisify } = require("util");
 const readdir = promisify(require("fs").readdir);
@@ -14,8 +15,24 @@ client.logger = require("./modules/Logger");
 require("./modules/functions.js")(client);
 client.commands = new Enmap();
 client.aliases = new Enmap();
-client.queue = new Enmap();
+client.queue = new Map();
 client.settings = new Enmap({name: "settings"});
+
+/*
+Structures.extend("Guild", Guild => {
+  class MusicGuild extends Guild {
+    constructor(client, data) {
+      super(client, data);
+      this.musicData = {
+        queue: [],
+        isPlaying: false,
+        songDispatcher: null
+      };
+    }
+  }
+  return MusicGuild;
+});
+*/
 
 async function crawl(directory, filesArray) {
 	const dirs = await readdir(directory, {

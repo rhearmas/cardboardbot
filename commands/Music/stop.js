@@ -1,5 +1,4 @@
 exports.run = async (client, message, args, level) => {
-  /*
   var server = client.servers[message.guild.id];
   if(message.guild.voiceConnection) {
     for(var i = server.queue.length -1; i >= 0; i--) {
@@ -7,17 +6,23 @@ exports.run = async (client, message, args, level) => {
     }
 
     if(server.dispatcher) server.dispatcher.end();
-    message.channel.send(`${message.author.mention} has stopped the music.`);
+    message.channel.send(`${message.author} has stopped the music.`);
   }
 
   if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
-  */
-  const serverQueue = message.client.queue.get(message.guild.id);
+
+  /*
+  const serverQueue = client.queue.get(message.guild.id);
   if (!message.member.voiceChannel) return message.channel.send('You have to be in a voice channel to stop the music!');
 
   serverQueue.songs = [];
-  serverQueue.connection.dispatcher.end();
-  message.channel.send(`${message.author.mention} has stopped the music.`);
+  if(serverQueue.connection.dispatcher) serverQueue.connection.dispatcher.end();
+  message.channel.send(`${message.author} has stopped the music.`);
+
+  if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
+  */
+
+
 };
 
 exports.conf = {
