@@ -352,5 +352,5 @@ module.exports = (client) => {
     });
   }
 
-	client.servers = {};
+  client.servers = {};
 }

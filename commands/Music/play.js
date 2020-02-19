@@ -1,10 +1,32 @@
-const Youtube = require("simple-youtube-api");
 const ytdl = require("ytdl-core");
-const youtube = new Youtube(process.env.YOUTUBEAPI);
+
+function play(connection, message) {
+  var server = client.servers[message.guild.id];
+
+  server.dispatcher = connection.play(ytdl(server.queue[0], {filter: "audioonly"}));
+
+  server.queue.shift();
+
+  server.dispatcher.on("end", function() {
+    if(server.queue[0]) play(connection, message);
+    else connection.disconnect();
+  });
+}
 
 exports.run = async (client, message, args, level) => {
-  
+  if(!args[0]) return message.reply("please provide a valid URL.");
+  if(!message.member.voice.channel) return message.reply("you must be in a voice channel to use this command.");
 
+  if(!client.servers[message.guild.id]) client.servers[message.guild.id] = {
+    queue: []
+  };
+  
+  var server = client.servers[message.guild.id];
+
+  if(!message.guild.voiceConnection) message.member.voice.channel.join().then(function(connection) {
+    play(connection, message);
+  });
+  
   /*
   const queue = client.queue;
   const serverQueue = client.queue.get(message.guild.id);

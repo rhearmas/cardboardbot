@@ -24,7 +24,10 @@ exports.run = async (client, message, args, level) => {
   if(message.guild.voiceConnection) message.guild.voiceConnection.disconnect();
   */
 
+  var server = client.servers[message.guild.id];
 
+  if(message.guild.voice.connection) message.guild.voice.connection.disconnect();
+  message.channel.send(`${message.author} has stopped the music.`);
 };
 
 exports.conf = {
