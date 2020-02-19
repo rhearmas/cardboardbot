@@ -1,5 +1,5 @@
 exports.run = async (client, message, args, level) => {
-  var server = servers[message.guild.id];
+  var server = client.servers[message.guild.id];
 
   if(server.dispatcher) server.dispatcher.end();
   message.channel.send(`${message.author.mention} has skipped the current song.`);

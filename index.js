@@ -14,11 +14,12 @@ client.logger = require("./modules/Logger");
 require("./modules/functions.js")(client);
 client.commands = new Enmap();
 client.aliases = new Enmap();
+client.queue = new Enmap();
 client.settings = new Enmap({name: "settings"});
 
 async function crawl(directory, filesArray) {
 	const dirs = await readdir(directory, {
-		withFileTypes: true 
+		withFileTypes: true
 	});
 
 	for (let i = 0; i < dirs.length; i++) {
@@ -51,13 +52,13 @@ const init = async () => {
 		const event = require(`./events/${file}`);
 		client.on(eventName, event.bind(null, client));
 	});
-	
+
 	client.levelCache = {};
 	for (let i = 0; i < client.config.permLevels.length; i++) {
 		const thisLevel = client.config.permLevels[i];
 		client.levelCache[thisLevel.name] = thisLevel.level;
 	}
-	
+
 	client.login(client.config.token);
 };
 
