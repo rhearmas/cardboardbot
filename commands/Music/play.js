@@ -1,9 +1,9 @@
-const ytdl = require("ytdl-core");
+const ytdl = require("ytdl-core-discord");
 
-function play(connection, message) {
+async function play(connection, message) {
   var server = client.servers[message.guild.id];
 
-  server.dispatcher = connection.play(ytdl(server.queue[0], {filter: "audioonly"}));
+  server.dispatcher = connection.play(await ytdl(server.queue[0]), {filter: "audioonly"}, {type: opus});
 
   server.queue.shift();
 
@@ -22,6 +22,8 @@ exports.run = async (client, message, args, level) => {
   };
   
   var server = client.servers[message.guild.id];
+
+  server.queue.push(args[0]);
 
   if(!message.guild.voiceConnection) message.member.voice.channel.join().then(function(connection) {
     play(connection, message);

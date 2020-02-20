@@ -37,7 +37,8 @@
     "recrawl": "^2.0.0",
     "roll": "^1.2.0",
     "webdict": "^0.3.0",
-    "ytdl-core": "^1.0.8"
+    "ytdl-core": "^1.0.8",
+    "ytdl-core-discord": "^1.1.0"
   },
   "publishConfig": {
     "registry": "https://npm.pkg.github.com/"
