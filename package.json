@@ -1,43 +1,26 @@
 {
-  "name": "cardboardbot",
+  "name": "cbv2",
   "version": "1.0.0",
-  "description": "Discord bot that manages everything at my discord server.",
+  "description": "Discord bot that runs The Wizard's Den.",
   "main": "index.js",
+  "dependencies": {
+    "@types/es6-promise": "^3.3.0",
+    "@types/node": "^14.14.41",
+    "discord.js": "^12.5.1",
+    "enmap": "^5.8.2",
+    "inquirer": "^7.3.3"
+  },
   "scripts": {
-    "start": "node index.js",
-    "postinstall": "node setup.js"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "engines": {
-    "node": ">=8"
-  },
+  "author": "rhearmas",
+  "license": "ISC",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rhearmas/cardboardbot.git"
+    "url": "git+https://gitlab.com/rhearmas/cardboardbox.git"
   },
-  "author": "rhearmas <rhearmas@gmail.com> (http://rhearmas.carrd.co)",
   "bugs": {
-    "url": "https://github.com/rhearmas/cardboardbot/issues"
+    "url": "https://gitlab.com/rhearmas/cardboardbox/issues"
   },
-  "homepage": "https://github.com/rhearmas/cardboardbot#readme",
-  "dependencies": {
-    "better-sqlite3": "^5.4.0",
-    "chalk": "^2.4.2",
-    "common-tags": "^1.8.0",
-    "crawl": "^0.3.1",
-    "dateformat": "^3.0.3",
-    "discord-emoji": "^1.1.1",
-    "discord.js": "^11.5.1",
-    "enmap": "^5.0.0",
-    "inquirer": "^6.3.1",
-    "math-expression-evaluator": "^1.2.17",
-    "moment": "^2.24.0",
-    "moment-duration-format": "^2.3.2",
-    "node-fetch": "^2.6.0",
-    "recrawl": "^2.0.0",
-    "roll": "^1.2.0",
-    "webdict": "^0.3.0"
-  },
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
-  }
+  "homepage": "https://gitlab.com/rhearmas/cardboardbox#readme"
 }
